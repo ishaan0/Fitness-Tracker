@@ -1,1 +1,33 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <p>this is works</p>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <!-- <div class="container" fxLayout fxLayoutAlign="start center"> -->
+        <div>
+          <button
+            *ngIf="!isLargeScreen"
+            mat-icon-button
+            (click)="sidenav.toggle()"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+        <div><a routerLink="/">LOGO</a></div>
+        <div fxLayout fxLayoutAlign="flex-end" fxFlex *ngIf="isLargeScreen">
+          <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+            <li><a routerLink="/signup">Signup</a></li>
+            <li><a routerLink="/login">Login</a></li>
+            <li><a routerLink="/training">Traning</a></li>
+          </ul>
+        </div>
+      <!-- </div> -->
+    </mat-toolbar>
+    <main>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
