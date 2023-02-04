@@ -1,31 +1,12 @@
-:host{
-
-  .container{
-    // width: 90%;
-    margin: 0 auto;
-  }
-
-  mat-sidenav-container, mat-sidenav, mat-sidenav-content{
+:host {
+  mat-sidenav-container,
+  mat-sidenav,
+  mat-sidenav-content {
     height: 100%;
   }
 
-  mat-sidenav{
+  mat-sidenav {
     width: 250px;
-  }
-
-  a{
-    text-decoration: none;
-    color: white;
-  }
-
-  a:hover, a:active{
-    color: lightgray;
-  }
-
-  .navigation-items{
-    list-style: none;
-    margin: 0;
-    padding: 0;
 
   }
 

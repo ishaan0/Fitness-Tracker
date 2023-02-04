@@ -15,6 +15,8 @@ import { PastTrainingComponent } from './training/past-training/past-training.co
 import { WelcomeComponent } from './welcome/welcome.component';
 import { TrainingComponent } from './training/training.component';
 import { MaterialModule } from './material.module';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SideNavComponent } from './navigation/side-nav/side-nav.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { MaterialModule } from './material.module';
     NewTrainingComponent,
     PastTrainingComponent,
     WelcomeComponent,
-    TrainingComponent
+    TrainingComponent,
+    HeaderComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
