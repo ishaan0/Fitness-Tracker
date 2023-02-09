@@ -17,6 +17,8 @@ import { TrainingComponent } from './training/training.component';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SideNavComponent } from './navigation/side-nav/side-nav.component';
+import { StopTraining } from './training/stop-training.component';
+
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { SideNavComponent } from './navigation/side-nav/side-nav.component';
     WelcomeComponent,
     TrainingComponent,
     HeaderComponent,
-    SideNavComponent
+    SideNavComponent,
+    StopTraining
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { SideNavComponent } from './navigation/side-nav/side-nav.component';
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [StopTraining]
 })
 export class AppModule { }
