@@ -19,6 +19,6 @@
       </mat-error>
       <mat-hint align="end">{{pwInput.value.length}} / 10</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
   </form>
 </div>
