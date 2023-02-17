@@ -11,10 +11,10 @@
   <div><a routerLink="/">LOGO</a></div>
   <div fxLayout fxLayoutAlign="flex-end" fxFlex *ngIf="isLargeScreen">
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-      <li><a routerLink="/signup">Signup</a></li>
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/training">Traning</a></li>
-      <li><a >Logout</a></li>
+      <li *ngIf="!isAuth"><a routerLink="/signup">Signup</a></li>
+      <li *ngIf="!isAuth"><a routerLink="/login">Login</a></li>
+      <li *ngIf="isAuth"><a routerLink="/training">Traning</a></li>
+      <li *ngIf="isAuth"><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
     </ul>
   </div>
 </mat-toolbar>
