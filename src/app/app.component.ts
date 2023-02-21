@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit{
   screenWidth!: Number;
   isLargeScreen: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private authService: AuthService) {
     if (isPlatformBrowser(this.platformId)) {
       this.screenWidth = window.innerWidth;
     }
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit{
     if(this.screenWidth > 599){
       this.isLargeScreen = true ;
     }
+    this.authService.initAuthListener();
   }
 
 }

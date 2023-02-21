@@ -1,53 +1,65 @@
-import { Injectable } from "@angular/core";
-import { AuthData } from "./auth-data.model";
-import { User } from "./user.model";
-import { Subject } from "rxjs";
-import { Router } from "@angular/router";
-
+import { Injectable } from '@angular/core';
+import { AuthData } from './auth-data.model';
+import { User } from './user.model';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { TrainingService } from '../training/training.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthService{
-  authChange = new Subject<boolean>() ;
-  private user: User = null ;
+export class AuthService {
+  authChange = new Subject<boolean>();
+  private isAuthenticated: boolean = false;
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private trainingService: TrainingService
+  ) {}
 
-  registerUser(authData: AuthData){
-    this.user = {
-      email: authData.email ,
-      userId: Math.round(Math.random() * 10000).toString()
-    }
-    this.authSuccessfully() ;
+  initAuthListener(){
+    this.afAuth.authState.subscribe(user => {
+      if(user){
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this.router.navigate(['/training']);
+      }
+      else{
+        this.trainingService.cancelSubscriptions();
+        this.isAuthenticated = false;
+        this.authChange.next(false);
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
-  login(authData: AuthData){
-    this.user = {
-      email: authData.email,
-      userId: Math.round(Math.random() * 10000).toString()
-    }
-    this.authSuccessfully() ;
+  registerUser(authData: AuthData) {
+    this.afAuth
+      .createUserWithEmailAndPassword(authData.email, authData.password)
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  logOut(){
-    this.user = null ;
-    this.authChange.next(false) ;
-    this.router.navigate(['/login']) ;
+  login(authData: AuthData) {
+    this.afAuth
+      .signInWithEmailAndPassword(authData.email, authData.password)
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  getUser(){
-    return { ...this.user } ;
+  logOut() {
+    this.afAuth.signOut();
   }
 
-  isAuth(){
-    return this.user !== null ;
+  isAuth() {
+    return this.isAuthenticated;
   }
 
-
-  authSuccessfully(){
-    this.authChange.next(true) ;
-    this.router.navigate(['/training']) ;
-  }
 
 }
