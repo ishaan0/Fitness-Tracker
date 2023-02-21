@@ -4,9 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexModule } from '@angular/flex-layout';
 import { AngularFireModule } from '@angular/fire/compat';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
-// import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,41 +22,35 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SideNavComponent } from './navigation/side-nav/side-nav.component';
 import { StopTraining } from './training/stop-training.component';
 import { environment } from 'src/environments/environment';
-// import { AngularFireModule } from '@angular/fire/compat';
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SignupComponent,
-    CurrentTrainingComponent,
-    NewTrainingComponent,
-    PastTrainingComponent,
-    WelcomeComponent,
-    TrainingComponent,
-    HeaderComponent,
-    SideNavComponent,
-    StopTraining
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MaterialModule,
-    FlexModule,
-    ReactiveFormsModule,
-    // AngularFireModule
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireModule
-    // AngularFirestoreModule
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideFirestore(() => getFirestore())
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [StopTraining]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        SignupComponent,
+        CurrentTrainingComponent,
+        NewTrainingComponent,
+        PastTrainingComponent,
+        WelcomeComponent,
+        TrainingComponent,
+        HeaderComponent,
+        SideNavComponent,
+        StopTraining
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MaterialModule,
+        FlexModule,
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
