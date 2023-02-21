@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexModule } from '@angular/flex-layout';
+import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +22,8 @@ import { MaterialModule } from './material.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SideNavComponent } from './navigation/side-nav/side-nav.component';
 import { StopTraining } from './training/stop-training.component';
+import { environment } from 'src/environments/environment';
+// import { AngularFireModule } from '@angular/fire/compat';
 
 
 
@@ -42,7 +48,13 @@ import { StopTraining } from './training/stop-training.component';
     FormsModule,
     MaterialModule,
     FlexModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // AngularFireModule
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireModule
+    // AngularFirestoreModule
+    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent],
