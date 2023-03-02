@@ -13,13 +13,17 @@ import { Subscription } from 'rxjs';
 export class NewTrainingComponent implements OnInit, OnDestroy {
   excercises: Exercise[] = [];
   exercisesSubscription: Subscription;
+  isLoading: boolean;
 
   constructor(private trainingService: TrainingService) {}
 
   ngOnInit(): void {
-    this.exercisesSubscription = this.trainingService.exercisesChanged.subscribe(
-      (exercises) => (this.excercises = exercises)
-    );
+    this.isLoading = true;
+    this.exercisesSubscription =
+      this.trainingService.exercisesChanged.subscribe((exercises) => {
+        this.excercises = exercises;
+        this.isLoading = false;
+      });
     this.trainingService.fetchAvailableExercises();
   }
 

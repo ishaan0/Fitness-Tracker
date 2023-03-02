@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { TrainingService } from '../training/training.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UIService } from '../shared/ui.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class AuthService {
     private router: Router,
     private afAuth: AngularFireAuth,
     private trainingService: TrainingService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private uiService: UIService
   ) {}
 
   initAuthListener(){
@@ -38,18 +40,24 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData) {
+    this.uiService.loadingStateChanged.next(true);
     this.afAuth
       .createUserWithEmailAndPassword(authData.email, authData.password)
-      .then()
+      .then(() => {
+        this.uiService.loadingStateChanged.next(false);
+      })
       .catch((error) => {
         this.showFailedAuthenticationMessage(error.message);
       });
   }
 
   login(authData: AuthData) {
+    this.uiService.loadingStateChanged.next(true);
     this.afAuth
       .signInWithEmailAndPassword(authData.email, authData.password)
-      .then()
+      .then(() => {
+        this.uiService.loadingStateChanged.next(false);
+      })
       .catch((error) => {
         this.showFailedAuthenticationMessage(error.message);
       });

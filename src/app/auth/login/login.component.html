@@ -19,6 +19,7 @@
       </mat-error>
       <mat-hint align="end">{{pwInput.value.length}} / 10</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+    <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
 </div>
