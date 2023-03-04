@@ -1,10 +1,6 @@
 <mat-toolbar color="primary">
   <div>
-    <button
-      *ngIf="!isLargeScreen"
-      mat-icon-button
-      (click)="onSidenavToogle()"
-    >
+    <button *ngIf="!isLargeScreen" mat-icon-button (click)="onSidenavToogle()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
@@ -14,7 +10,9 @@
       <li *ngIf="!isAuth"><a routerLink="/signup">Signup</a></li>
       <li *ngIf="!isAuth"><a routerLink="/login">Login</a></li>
       <li *ngIf="isAuth"><a routerLink="/training">Traning</a></li>
-      <li *ngIf="isAuth"><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
+      <li *ngIf="isAuth">
+        <a style="cursor: pointer" (click)="onLogout()">Logout</a>
+      </li>
     </ul>
   </div>
 </mat-toolbar>

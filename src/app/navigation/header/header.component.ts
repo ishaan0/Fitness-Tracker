@@ -5,11 +5,12 @@ import {
   PLATFORM_ID,
   EventEmitter,
   Output,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { AuthService } from 'src/app/auth/auth.service';
-import { Subscription } from 'rxjs' ;
+import { Subscription } from 'rxjs';
+
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sidenavToggle = new EventEmitter<void>();
   screenWidth!: Number;
   isLargeScreen: boolean = false;
-  isAuth: boolean = false ;
-  authSubscription: Subscription ;
+  isAuth: boolean = false;
+  authSubscription: Subscription;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -37,21 +38,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isLargeScreen = true;
     }
 
-    this.authSubscription = this.authService.authChange.subscribe(authStatus => {
-      this.isAuth = authStatus ;
-    }) ;
+    this.authSubscription = this.authService.authChange.subscribe(
+      (authStatus) => {
+        this.isAuth = authStatus;
+      }
+    );
   }
 
   onSidenavToogle() {
     this.sidenavToggle.emit();
   }
 
-  onLogout(){
-    this.authService.logOut() ;
+  onLogout() {
+    this.authService.logOut();
   }
 
-  ngOnDestroy(){
-    this.authSubscription.unsubscribe() ;
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
-
 }

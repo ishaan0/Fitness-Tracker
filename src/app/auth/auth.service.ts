@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AuthData } from './auth-data.model';
-import { User } from './user.model';
-import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { TrainingService } from '../training/training.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject } from 'rxjs';
+
+import { TrainingService } from '../training/training.service';
+import { AuthData } from './auth-data.model';
 import { UIService } from '../shared/ui.service';
 
 @Injectable({
@@ -23,14 +23,13 @@ export class AuthService {
     private uiService: UIService
   ) {}
 
-  initAuthListener(){
-    this.afAuth.authState.subscribe(user => {
-      if(user){
+  initAuthListener() {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
         this.isAuthenticated = true;
         this.authChange.next(true);
         this.router.navigate(['/training']);
-      }
-      else{
+      } else {
         this.trainingService.cancelSubscriptions();
         this.isAuthenticated = false;
         this.authChange.next(false);
@@ -71,8 +70,7 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  showFailedAuthenticationMessage(errorMessage: string){
-    this.snackBar.open(errorMessage, null, {duration: 3000});
+  showFailedAuthenticationMessage(errorMessage: string) {
+    this.snackBar.open(errorMessage, null, { duration: 3000 });
   }
-
 }

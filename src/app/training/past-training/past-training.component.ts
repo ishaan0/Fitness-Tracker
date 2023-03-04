@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+
 import { Exercise } from '../exercise.model';
 import { TrainingService } from '../training.service';
 
@@ -23,11 +24,11 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private trainingService: TrainingService) {}
 
   ngOnInit(): void {
-    this.subscription = this.trainingService.finishedExercisesChanged
-    .subscribe(
+    this.subscription = this.trainingService.finishedExercisesChanged.subscribe(
       (exercises: Exercise[]) => {
         this.dataSource.data = exercises;
-      });
+      }
+    );
     this.trainingService.fetchCompletedOrCancelledExercises();
   }
 
@@ -42,6 +43,8 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Exercise } from './exercise.model';
-import { Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs';
-import { Subscription } from 'rxjs';
+import { map, Subject, Subscription } from 'rxjs';
+
+import { Exercise } from './exercise.model';
 
 @Injectable({
   providedIn: 'root',
@@ -94,8 +93,8 @@ export class TrainingService {
     );
   }
 
-  cancelSubscriptions(){
-    this.fbSubscriptions.forEach(sub => sub.unsubscribe()) ;
+  cancelSubscriptions() {
+    this.fbSubscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   private addDataToDatabase(exercise: Exercise) {

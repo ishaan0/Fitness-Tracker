@@ -1,8 +1,13 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="loginForm">
-  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <form
+    [formGroup]="form"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+  >
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
+      <input matInput formControlName="email" />
       <mat-error *ngIf="form.get('email')?.hasError('required')">
         Email is required
       </mat-error>
@@ -13,13 +18,22 @@
 
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" #pwInput>
+      <input matInput type="password" formControlName="password" #pwInput />
       <mat-error *ngIf="form.get('password')?.hasError('required')">
         Password is required
       </mat-error>
-      <mat-hint align="end">{{pwInput.value.length}} / 10</mat-hint>
+      <mat-hint align="end">{{ pwInput.value.length }} / 10</mat-hint>
     </mat-form-field>
-    <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+    <button
+      *ngIf="!isLoading"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
 </div>

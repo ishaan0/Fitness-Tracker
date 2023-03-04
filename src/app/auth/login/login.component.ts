@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
+
 import { UIService } from 'src/app/shared/ui.service';
 import { AuthService } from '../auth.service';
 
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loadingSubscription.unsubscribe();
+    if (this.loadingSubscription) {
+      this.loadingSubscription.unsubscribe();
+    }
   }
 }
